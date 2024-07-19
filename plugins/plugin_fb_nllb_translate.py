@@ -297,7 +297,7 @@ def translate(core:OneRingCore, text:str, from_lang:str = "", to_lang:str = "", 
     inputs = tokenizer_from(text, return_tensors="pt").to(to_device)
 
     translated_tokens = model.generate(
-                            **inputs, forced_bos_token_id=tokenizer_from.lang_code_to_id[to_lang_tr], max_length=int(len(text)*5)
+                            **inputs, forced_bos_token_id=tokenizer_from.convert_tokens_to_ids(to_lang_tr), max_length=int(len(text)*5)
                         )
     res = tokenizer_from.batch_decode(translated_tokens, skip_special_tokens=True)[0]
 
